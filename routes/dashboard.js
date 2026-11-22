@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const Platform = require("../models/Platform");
+const Platform = require("../models/platform");
 const PrivacyRequest = require("../models/PrivacyRequest");
 
 const router = express.Router();
