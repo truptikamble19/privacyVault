@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0b1e">
+  <title>PrivacyVault — Privacy Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+<div id="login" class="login-screen">
+  <form id="loginForm" class="login-card">
+    <div class="brand-mark">P</div>
+    <p class="eyebrow">PERSONAL PRIVACY INTELLIGENCE</p>
+    <h1>Your data.<br><span>Your control.</span></h1>
+    <p class="muted">One secure workspace to understand, manage and monitor your digital privacy.</p>
+
+    <label for="email">Email address</label>
+    <input id="email" type="email" placeholder="you@example.com" required>
+
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="Enter password" minlength="8" required>
+
+    <p id="loginError" class="error" role="alert"></p>
+
+    <button class="btn primary full" type="submit">
+      Sign in <span>↗</span>
+    </button>
+
+    <p class="small muted">
+      New to PrivacyVault?
+      <button type="button" id="showRegister" class="text-button">Create an account</button>
+    </p>
+  </form>
+
+  <form id="registerForm" class="login-card" hidden>
+    <div class="brand-mark">P</div>
+    <p class="eyebrow">JOIN PRIVACYVAULT</p>
+    <h1>Create your<br><span>account.</span></h1>
+    <p class="muted">Create your personal privacy workspace.</p>
+
+    <label for="registerName">Full name</label>
+    <input id="registerName" type="text" placeholder="Your name" required>
+
+    <label for="registerEmail">Email address</label>
+    <input id="registerEmail" type="email" placeholder="you@example.com" required>
+
+    <label for="registerPassword">Password</label>
+    <input id="registerPassword" type="password" placeholder="At least 8 characters" minlength="8" required>
+
+    <p id="registerError" class="error" role="alert"></p>
+
+    <button class="btn primary full" type="submit">
+      Create account <span>↗</span>
+    </button>
+
+    <p class="small muted">
+      Already registered?
+      <button type="button" id="showLogin" class="text-button">Sign in</button>
+    </p>
+  </form>
+</div>
+
+
+  <div id="app" class="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="PrivacyVault home">
+        <span class="brand-mark">P</span>
+        <span>privacy<span class="brand-light">vault</span><small>INTELLIGENCE CONSOLE</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-btn active" data-view="dashboard"><span>▦</span> Overview</button>
+      <button class="nav-btn" data-view="platforms"><span>◈</span> Connected platforms <b id="platformBadge">8</b></button>
+      <button class="nav-btn" data-view="requests"><span>↗</span> Privacy requests <b id="requestBadge">0</b></button>
+      <button class="nav-btn" data-view="security"><span>⬡</span> Security centre</button>
+      <div class="side-label">RESOURCES</div>
+      <button class="nav-btn" data-view="guide"><span>▤</span> Privacy guide</button>
+      <div class="sidebar-bottom">
+        <div class="upgrade-icon">✳</div>
+        <strong>Privacy is power.</strong>
+        <p>Take control of your digital footprint, one request at a time.</p>
+        <button class="btn outline full" data-view="guide">Explore privacy →</button>
+      </div>
+      <div class="side-user">
+        <div class="avatar" id="sideAvatar">U</div>
+        <div class="user-info"><strong id="sideName">Your account</strong><small>Personal workspace</small></div>
+        <button id="logout" class="logout-btn" type="button">
+  <span>↪</span>
+  <span>Log out</span>
+</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span>/</span><strong id="crumb">Overview</strong></div>
+        <div class="top-actions">
+          <label class="search"><span>⌕</span><input id="globalSearch" placeholder="Search anything..." aria-label="Search"></label>
+          <button class="icon-button" id="helpBtn" title="Help">?</button>
+          <button class="profile" id="profileBtn"><span class="avatar" id="topAvatar">U</span><span id="topName">User</span><span>⌄</span></button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="page-heading">
+          <div><p class="eyebrow">YOUR PRIVACY AT A GLANCE</p><h1>Good to see you<span class="purple">.</span></h1><p class="muted">A clearer picture of your digital footprint starts here.</p></div>
+          <button class="btn primary" data-view="requests">＋ New privacy request</button>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric metric-purple"><div class="metric-top"><span>Overall risk score</span><span class="metric-icon">◉</span></div><div class="metric-value"><strong id="score">0</strong><span>/100</span></div><div class="metric-bottom"><span id="riskLabel">Calculating</span><div class="mini-gauge"><span id="scoreRing"></span></div></div></article>
+          <article class="metric metric-blue"><div class="metric-top"><span>Platforms monitored</span><span class="metric-icon">◈</span></div><div class="metric-value"><strong id="platformCount">8</strong></div><div class="metric-bottom"><span>Across your digital footprint</span><span>↗</span></div></article>
+          <article class="metric metric-pink"><div class="metric-top"><span>Active requests</span><span class="metric-icon">↗</span></div><div class="metric-value"><strong id="activeCount">0</strong></div><div class="metric-bottom"><span>Awaiting completion</span><span>◷</span></div></article>
+          <article class="metric metric-teal"><div class="metric-top"><span>Completed requests</span><span class="metric-icon">✓</span></div><div class="metric-value"><strong id="completedCount">0</strong></div><div class="metric-bottom"><span>Your recorded progress</span><span>↗</span></div></article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel risk-panel">
+            <div class="panel-heading"><div><p class="eyebrow">SECURITY ANALYTICS</p><h2>Privacy risk overview</h2></div><span class="live-dot">DEMO DATA</span></div>
+            <div class="risk-layout">
+              <div class="risk-gauge">
+                <svg viewBox="0 0 220 145" role="img" aria-label="Privacy risk gauge">
+                  <path d="M 25 120 A 85 85 0 0 1 195 120" fill="none" stroke="#292a49" stroke-width="13" stroke-linecap="round"/>
+                  <path id="gaugeArc" d="M 25 120 A 85 85 0 0 1 195 120" fill="none" stroke="#a78bfa" stroke-width="13" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+                </svg>
+                <div class="gauge-number"><strong id="gaugeScore">0</strong><span>RISK INDEX</span></div>
+              </div>
+              <div class="risk-summary"><span class="status-pill warning" id="riskPill">Calculating</span><h3 id="riskHeading">Understanding your footprint</h3><p class="muted" id="riskDescription">Your demo dashboard is being prepared.</p><button class="text-button" data-view="security">View security insights ↗</button></div>
+            </div>
+            <div class="risk-foot"><span><i class="dot dot-purple"></i>Privacy exposure</span><span id="riskFootValue">0 / 100</span></div>
+          </article>
+
+          <article class="panel chart-panel">
+            <div class="panel-heading"><div><p class="eyebrow">ACTIVITY</p><h2>Request activity</h2></div><select id="chartRange" aria-label="Chart period"><option value="7">7 days</option><option value="30">30 days</option></select></div>
+            <div class="chart-legend"><span><i class="dot dot-purple"></i>Created</span><span><i class="dot dot-teal"></i>Completed</span></div>
+            <div id="activityChart" class="activity-chart" aria-label="Request activity chart"></div>
+            <div class="chart-axis"><span>Earlier</span><span>Recent</span></div>
+          </article>
+
+          <article class="panel breakdown-panel">
+            <div class="panel-heading"><div><p class="eyebrow">DATA LANDSCAPE</p><h2>Exposure breakdown</h2></div><span class="soft-icon">◉</span></div>
+            <div id="breakdownList" class="breakdown-list"></div>
+            <p class="footnote">Illustrative distribution for the demo, not a scan of real accounts.</p>
+          </article>
+
+          <article class="panel platform-panel">
+            <div class="panel-heading"><div><p class="eyebrow">YOUR ECOSYSTEM</p><h2>Highest risk platforms</h2></div><button class="text-button" data-view="platforms">View all ↗</button></div>
+            <div id="topPlatforms" class="top-platforms"></div>
+          </article>
+
+          <article class="panel requests-panel">
+            <div class="panel-heading"><div><p class="eyebrow">DATA RIGHTS</p><h2>Recent requests</h2></div><button class="text-button" data-view="requests">View all ↗</button></div>
+            <div id="recentRequests" class="recent-requests"></div>
+          </article>
+
+          <article class="panel insight-panel">
+            <div class="insight-symbol">✳</div><p class="eyebrow">PRIVACY INSIGHT</p><h2>Small steps. Stronger privacy.</h2><p class="muted">Review account retention settings and avoid sharing passwords, financial details or other sensitive information in AI conversations.</p><button class="btn outline" data-view="guide">Explore privacy guide ↗</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-platforms">
+        <div class="page-heading"><div><p class="eyebrow">YOUR DIGITAL ECOSYSTEM</p><h1>Connected platforms<span class="purple">.</span></h1><p class="muted">Review platform information, illustrative risk levels and available request options.</p></div><span class="count-chip">8 platforms</span></div>
+        <div class="filter-bar"><label class="search wide-search"><span>⌕</span><input id="platformSearch" placeholder="Find a platform..."></label><select id="riskFilter"><option value="all">All risk levels</option><option value="high">High risk</option><option value="medium">Medium risk</option><option value="low">Low risk</option></select></div>
+        <div id="allPlatforms" class="platform-grid"></div>
+      </section>
+
+      <section class="view" id="view-requests">
+        <div class="page-heading"><div><p class="eyebrow">YOUR DATA RIGHTS</p><h1>Privacy requests<span class="purple">.</span></h1><p class="muted">Create and track your access, correction and deletion requests.</p></div><button class="btn primary" id="newRequestBtn">＋ New request</button></div>
+        <div class="metric-grid request-metrics"><article class="metric compact"><span>All requests</span><strong id="statTotal">0</strong></article><article class="metric compact"><span>In progress</span><strong id="statActive">0</strong></article><article class="metric compact"><span>Completed</span><strong id="statDone">0</strong></article></div>
+        <div class="panel table-panel"><div class="panel-heading"><div><p class="eyebrow">REQUEST HISTORY</p><h2>All activity</h2></div><select id="requestFilter"><option value="all">All statuses</option><option value="Pending">Pending</option><option value="Review">Review</option><option value="Completed">Completed</option></select></div><div id="requestList" class="request-list"></div></div>
+        <p class="footnote">Statuses in demo mode are locally recorded examples. A real platform request must be submitted to that platform or through a connected backend.</p>
+      </section>
+
+      <section class="view" id="view-security">
+        <div class="page-heading"><div><p class="eyebrow">SECURITY & PROTECTION</p><h1>Security centre<span class="purple">.</span></h1><p class="muted">Understand the signals that can help you improve your privacy hygiene.</p></div><span class="status-pill warning">Illustrative analysis</span></div>
+        <div class="security-grid">
+          <article class="panel security-score"><p class="eyebrow">PRIVACY RISK INDEX</p><div class="security-big"><strong id="securityScore">0</strong><span>/100</span></div><div class="progress"><span id="securityProgress"></span></div><p id="securityText" class="muted"></p></article>
+          <article class="panel"><div class="panel-heading"><div><p class="eyebrow">RECOMMENDATIONS</p><h2>Recommended actions</h2></div></div><div class="action-list"><div class="action-row"><span class="action-icon purple-bg">01</span><div><strong>Review activity retention</strong><p>Check each platform's activity and data retention controls.</p></div><span class="action-tag">PRIORITY</span></div><div class="action-row"><span class="action-icon blue-bg">02</span><div><strong>Audit connected accounts</strong><p>Review sign-ins, connected applications and permissions.</p></div></div><div class="action-row"><span class="action-icon teal-bg">03</span><div><strong>Reduce sensitive sharing</strong><p>Avoid entering confidential or identifying information into prompts.</p></div></div><div class="action-row"><span class="action-icon pink-bg">04</span><div><strong>Track your privacy requests</strong><p>Keep a record of requests and any responses received.</p></div><button class="text-button" data-view="requests">Open ↗</button></div></div></article>
+          <article class="panel"><div class="panel-heading"><div><p class="eyebrow">RISK DISTRIBUTION</p><h2>Platform comparison</h2></div></div><div id="securityPlatforms" class="security-platforms"></div></article>
+          <article class="panel"><div class="panel-heading"><div><p class="eyebrow">SECURITY CHECKLIST</p><h2>Your privacy habits</h2></div></div><div id="checklist" class="checklist"><label><input type="checkbox" data-check="retention"> I reviewed activity retention settings.</label><label><input type="checkbox" data-check="permissions"> I reviewed account permissions.</label><label><input type="checkbox" data-check="sensitive"> I avoid sharing sensitive information.</label><label><input type="checkbox" data-check="password"> I use unique passwords and multi-factor authentication.</label></div><p class="footnote">Checklist completion is saved in this browser only.</p></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-guide">
+        <div class="page-heading"><div><p class="eyebrow">KNOWLEDGE IS CONTROL</p><h1>Privacy guide<span class="purple">.</span></h1><p class="muted">Practical ways to understand and manage your digital footprint.</p></div></div>
+        <div class="guide-grid">
+          <article class="panel guide-card"><span class="guide-number">01</span><h2>Understand your data</h2><p>Platforms may process account details, prompts, uploaded files, usage information and preferences. The categories and retention periods vary by service and settings.</p><button class="text-button" data-view="platforms">Explore platforms ↗</button></article>
+          <article class="panel guide-card"><span class="guide-number">02</span><h2>Review privacy settings</h2><p>Look for conversation history, training preferences, activity controls, export tools and account deletion options in each service's official settings.</p><button class="text-button" data-view="security">Review checklist ↗</button></article>
+          <article class="panel guide-card"><span class="guide-number">03</span><h2>Know your data rights</h2><p>Depending on your jurisdiction and the platform, you may be able to request access, correction or erasure. Eligibility, exceptions and response times vary.</p><button class="text-button" data-view="requests">Manage requests ↗</button></article>
+          <article class="panel guide-card"><span class="guide-number">04</span><h2>Keep a clear record</h2><p>Record the date, request type, confirmation and response. Keep reference numbers and evidence so you can follow up if needed.</p><button class="text-button" data-view="requests">Open request history ↗</button></article>
+          <article class="panel guide-card"><span class="guide-number">05</span><h2>Protect sensitive information</h2><p>Do not share passwords, OTPs, payment credentials, private documents or other sensitive personal information unnecessarily in prompts.</p></article>
+          <article class="panel guide-card"><span class="guide-number">06</span><h2>Understand this dashboard</h2><p>This project is a privacy-management interface. Its demo risk scores and sample data are illustrative, not a security audit or verified account scan.</p></article>
+        </div>
+      </section>
+
+      <footer class="footer"><span>PRIVACYVAULT <span class="purple">●</span> PRIVACY INTELLIGENCE CONSOLE</span><span>Demo environment · Local browser storage</span></footer>
+    </main>
+  </div>
+
+  <div id="platformModal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Close">×</button><div id="modalLogo" class="platform-logo large-logo">P</div><p class="eyebrow">PLATFORM DETAILS</p><h2 id="modalTitle">Platform</h2><p id="modalDomain" class="muted"></p><div class="modal-risk"><span>Illustrative risk score</span><strong id="modalRisk">0/100</strong></div><div class="progress"><span id="modalProgress"></span></div><h3>Potential data categories</h3><div id="modalData" class="tag-list"></div><h3>Privacy overview</h3><p id="modalPolicy" class="muted"></p><div class="modal-actions"><button class="btn primary" id="modalRequest">Create request →</button><a id="platformLink" class="btn outline" href="#" target="_blank" rel="noopener">Visit platform ↗</a></div></section></div>
+
+  <div id="requestModal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle"><button class="modal-close" data-close aria-label="Close">×</button><p class="eyebrow">DATA RIGHTS WORKFLOW</p><h2 id="requestModalTitle">Create a privacy request</h2><p class="muted">Record the request you intend to make to a platform.</p><form id="requestForm"><label for="requestPlatform">Platform</label><select id="requestPlatform" required></select><label for="requestType">Request type</label><select id="requestType" required><option value="Access">Access — request a copy of my data</option><option value="Correction">Correction — request correction of my data</option><option value="Deletion">Deletion — request erasure of my data</option></select><label for="requestNotes">Notes (optional)</label><textarea id="requestNotes" rows="3" maxlength="500" placeholder="Add a short note for your records..."></textarea><p id="requestError" class="error"></p><div class="modal-actions"><button type="button" class="btn outline" data-close>Cancel</button><button class="btn primary" type="submit">Create request →</button></div></form><p class="footnote">This records a demo request only. It does not contact or delete data from the selected platform.</p></section></div>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
